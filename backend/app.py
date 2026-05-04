@@ -2,6 +2,7 @@ from flask import Flask
 from flask_cors import CORS
 import pandas as pd
 import os
+from flask import Flask, send_from_directory
 
 app = Flask(__name__)
 
@@ -109,6 +110,13 @@ def product_search():
     results = df[df["title"].str.lower().str.contains(query, na=False)]
     results = results.sort_values("date")
     return results[["title", "price", "date", "category"]].head(500).to_json(orient="records")
+
+@app.route("/", defaults={"path": ""})
+@app.route("/<path:path>")
+def serve_react(path):
+    if path and os.path.exists(os.path.join("static", path)):
+        return send_from_directory("static", path)
+    return send_from_directory("static", "index.html")
 
 if __name__ == "__main__":
    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
