@@ -111,4 +111,4 @@ def product_search():
     return results[["title", "price", "date", "category"]].head(500).to_json(orient="records")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+   app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
