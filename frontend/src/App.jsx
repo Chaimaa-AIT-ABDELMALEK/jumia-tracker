@@ -5,7 +5,7 @@ import {
   ResponsiveContainer, CartesianGrid, ReferenceLine
 } from "recharts";
 
-const API = "";
+const API = "https://chaimaa.pythonanywhere.com";
 
 const COLORS = [
   "#f97316", "#3b82f6", "#10b981", "#a855f7",
